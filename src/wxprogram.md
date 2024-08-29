@@ -1,4 +1,5 @@
 # wxprogram
+[[toc]]
 ## 小程序有哪几种类型文件？ <Badge type="tip" text="primary" />
 ::: details 回答
 - WXML： 微信自己定义的一套组件
@@ -65,7 +66,7 @@
 - wx:if 条件渲染，在页面中隐藏或显示某个元素，如果为true则显示该元素，如果为false则不显示该元素 相当于vue中的v-if
 - hidden 条件渲染，在页面中隐藏或显示某个元素，如果为true则不显示该元素，如果为false则显示该元素 相当于vue中的v-show
 :::
-## app,json 全局配置文件描述？ <Badge type="tip" text="primary" />
+## app.json 全局配置文件描述？ <Badge type="tip" text="primary" />
 ::: details 回答
 - window 用于设置小程序的状态栏、导航条、标题、窗口背景色
 - tabBar 如果小程序是一个多 tab 应用（客户端窗口的底部或顶部有 tab 栏可以切换页面），可以通过 tabBar 设置 tab 栏的表现，包括颜色、字体、位置, 最多可以设置5个tab，最少2个tab

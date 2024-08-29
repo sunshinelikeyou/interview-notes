@@ -1,4 +1,5 @@
 # React Part
+[[toc]]
 ## 简述React的生命周期
 ::: details 回答 <Badge type="tip" text="primary" />
 

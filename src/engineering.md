@@ -23,6 +23,18 @@
 loader | 用于对模块的源代码进行转换 | 打包处理 CSS、图片、JS 等文件 | module.rules 中配置，类型是对象数组，⾥⾯描述了对于什么类型的⽂件（ test ），使⽤什么加载( loader )和使⽤的参数（ options 
 plugin | 用于对整个构建过程进行干预 | 打包优化、资源管理、注入环境变量 | plugins 中配置，类型是对象， 每一项是一个 Plugin 的实例，参数都通过构造函数传入
 :::
+
+## 什么是Code Splitting <Badge type="tip" text="primary" />
+::: details 回答
+>概念：Code Splitting 代码分割，是一种优化技术，它允许将一个大的chunk拆分成多个小的chunk，从而实现按需加载，减少初始加载时间，并提高应用程序的性能
+>开启方式： 在webpack的配置文件中，配置optimization.splitChunksk
+:::
+
+## Webpack的Source Map 是什么？如何配置生成Source Map? <Badge type="tip" text="primary" />
+::: details 回答
+>概念：Source Map 是源代码和构建后代码的映射关系。通常在开发阶段开启，用来调试代码，定位问题
+>配置方式： 在webpack的配置文件中，配置devtool:'source-map'
+:::
 ## 什么是 webpack 的热更新（Hot Module Replacement）？原理是什么？ <Badge type="warning" text="middle" />
 ::: details 回答
 >概念：Webpack 热更新（Hot Module Replacement）是指，在应用程序运行过程中，替换、添加或删除模块，而不需要重新加载页面。
@@ -37,17 +49,6 @@ plugin | 用于对整个构建过程进行干预 | 打包优化、资源管理�
 5. 完成模块编译： 完成模块编译。在经过第四步使用Loader翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系。
 6. 输出资源： 根据入口和模块之间的依赖关系，组装成一个个包含多个模块的Chunk，再把每个Chunk转换成单独的文件加入到输出列表，这步是可以修改输出内容的最后机会。
 7. 输出完成： 在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
-:::
-## 什么是Code Splitting <Badge type="tip" text="primary" />
-::: details 回答
->概念：Code Splitting 代码分割，是一种优化技术，它允许将一个大的chunk拆分成多个小的chunk，从而实现按需加载，减少初始加载时间，并提高应用程序的性能
->开启方式： 在webpack的配置文件中，配置optimization.splitChunksk
-:::
-
-## Webpack的Source Map 是什么？如何配置生成Source Map? <Badge type="tip" text="primary" />
-::: details 回答
->概念：Source Map 是源代码和构建后代码的映射关系。通常在开发阶段开启，用来调试代码，定位问题
->配置方式： 在webpack的配置文件中，配置devtool:'source-map'
 :::
 
 ## Webpack的Tree Shaking原理 <Badge type="warning" text="middle" />

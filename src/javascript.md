@@ -544,42 +544,6 @@ const observer = new ResizeObserver(entries => {
 observer.observe(document.getELementById('target'))
 ```
 
-:::
-##  如何实现大文件上传，如何实现分片上传,如何实现断点续传 <Badge type="danger" text="senior" />
-::: details 回答  [参考链接](https://juejin.cn/post/7312723512723488822?searchId=202408261110269E84D48A929E3B5265E6)
-- 计算文件MD5,需要用到 ‘spark-md5’依赖包，直接 npm i spark-md5 即可
-- 文件分片，用到文件的 “slice” api,将文件进行切割
-- 调用服务端主要是为了确认相同文件是否上传，如果已有MD5证明已经上传过，接着上传之前失败的分片
-:::
-##  如何一次性渲染十万条数据还能保证页面不卡顿 <Badge type="danger" text="senior" />
-::: details 回答 
->时间分片，下拉太快会有闪屏  [参考链接](https://juejin.cn/post/7354940230301057033)
-```js
-function timeSlice (total = 100000, once = 20, ul = document.getElementById("container");) {
-    function loop(curTotal) {
-      if (curTotal <= 0) return;
-      let pageCount = Math.min(curTotal, once);
-      window.requestAnimationFrame(() => {
-        let fragment = document.createDocumentFragment(); // 创建一个虚拟文档碎片
-        for (let i = 0; i < pageCount; i++) {
-          let li = document.createElement("li");
-          li.innerHTML = ~~(Math.random() * total);
-          fragment.appendChild(li); // 挂到fragment上
-        }
-        ul.appendChild(fragment); // 现在才回流
-        loop(curTotal - pageCount);
-      });
-    }
-    loop(total);
-}
-```
->虚拟滚动  [参考链接](https://juejin.cn/post/7354940230301057033)
-```js
-
-```
-:::
-
-
 ## 手撕：写一个高阶函数，第一个参数传递一个函数，第二个参数传递执行的次数，第三个参数传递时间间隔，要求它返回一个新的函数，调用新函数时，它每个时间间隔执行对应的参数函数，执行一定次数后结束。 <Badge type="warning" text="middle" />
 ::: details 回答 
 ```js
@@ -672,3 +636,38 @@ console.log(validateNumber("10")); // 输出 false
 - 优点：提高函数复用性，延迟执行，参数复用
 - 缺点：难以理解和维护，性能影响
 :::
+:::
+##  如何实现大文件上传，如何实现分片上传,如何实现断点续传 <Badge type="danger" text="senior" />
+::: details 回答  [参考链接](https://juejin.cn/post/7312723512723488822?searchId=202408261110269E84D48A929E3B5265E6)
+- 计算文件MD5,需要用到 ‘spark-md5’依赖包，直接 npm i spark-md5 即可
+- 文件分片，用到文件的 “slice” api,将文件进行切割
+- 调用服务端主要是为了确认相同文件是否上传，如果已有MD5证明已经上传过，接着上传之前失败的分片
+:::
+##  如何一次性渲染十万条数据还能保证页面不卡顿 <Badge type="danger" text="senior" />
+::: details 回答 
+>时间分片，下拉太快会有闪屏  [参考链接](https://juejin.cn/post/7354940230301057033)
+```js
+function timeSlice (total = 100000, once = 20, ul = document.getElementById("container");) {
+    function loop(curTotal) {
+      if (curTotal <= 0) return;
+      let pageCount = Math.min(curTotal, once);
+      window.requestAnimationFrame(() => {
+        let fragment = document.createDocumentFragment(); // 创建一个虚拟文档碎片
+        for (let i = 0; i < pageCount; i++) {
+          let li = document.createElement("li");
+          li.innerHTML = ~~(Math.random() * total);
+          fragment.appendChild(li); // 挂到fragment上
+        }
+        ul.appendChild(fragment); // 现在才回流
+        loop(curTotal - pageCount);
+      });
+    }
+    loop(total);
+}
+```
+>虚拟滚动  [参考链接](https://juejin.cn/post/7354940230301057033)
+```js
+
+```
+:::
+

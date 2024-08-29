@@ -2,7 +2,8 @@ import { defineConfig } from "vitepress";
 import  footnote_plugin  from "markdown-it-footnote";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base:'/.vitepress/dist',
+  lastUpdated: true,
+  base:'/',
   title: "Interview Question",
   description: "Record common front interview questions",
   head: [
@@ -32,7 +33,7 @@ export default defineConfig({
     sidebar: [
       {
         items: [
-          { text: "Introduce", link: "/src/introduce.md" },
+          { text: "介绍", link: "/src/introduce.md" },
         ],
       },
       {

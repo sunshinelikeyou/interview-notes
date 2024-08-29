@@ -1,4 +1,5 @@
 # TypeScript Part
+[[toc]]
 ## ts中type 和 interface 的区别？ <Badge type="tip" text="primary" />
 ::: details 回答
  名称 | 区别

@@ -19,6 +19,9 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    editLink: {
+      pattern: 'https://gitee.com/sunshinelikeyou/interview-notes/blob/master/:path'
+    },
     logo: "https://vitepress.dev/vitepress-logo.svg",
     nav: [
       { text: "Home", link: "/" },
@@ -39,11 +42,11 @@ export default defineConfig({
           { text: "HTML", link: "/src/html.md" },
           { text: "Css", link: "/src/css" },
           { text: "Javascript", link: "/src/javascript.md" },
+          { text: "TypeScript", link: "/src/typescript.md" },
           { text: "Vue", link: "/src/vue" },
           { text: "React", link: "/src/React.md" },
-          { text: "Engineering", link: "/src/engineering.md" },
-          { text: "H5", link: "/src/h5" },
-          { text: "WXprogram", link: "/src/wxprogram.md" },
+          { text: "前端工程化", link: "/src/engineering.md" },
+          { text: "微信小程序", link: "/src/wxprogram.md" },
           { text: "Uniapp", link: "/src/uniapp.md" },
         ],
       },

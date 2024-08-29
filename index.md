@@ -2,8 +2,8 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 hero:
-  name: "Interview Question"
-  text: "Record common front interview questions"
+  name: "前端面试题库"
+  text: "记录前端常见面试题"
   actions:
     - theme: brand
       text: Markdown Notes
@@ -14,27 +14,32 @@ hero:
     - theme: alt
       text: Introduce
       link: /src/introduce
-
 features:
   - title: Html
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details:  超文本标记语言 (Hypertext Mark-up Language)是一种用于创建网页的标准标记语言。
     link: /src/html
   - title: Css
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: 层叠样式表(Cascading Style Sheets)是一种用来表现HTML或XML等文件样式的计算机语言
     link: /src/css
   - title: Javascript
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言
     link: /src/javascript
+  - title: TypeScript
+    details: TypeScript是微软开发的一个开源的编程语言，通过在JavaScript的基础上添加静态类型定义构建而成
+    link: /src/typescript
   - title: Vue
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Vue是一个渐进式JavaScript 框架，易学易用，性能出色，适用场景丰富
     link: /src/vue
   - title: React
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: React用于构建 Web 和原生交互界面的库
     link: /src/react
-  - title: H5
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    link: /src/h5
-  - title: Wechatprogram
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 前端工程化
+    details: 前端工程化是指使用软件工程的技术和方法来进行前端的开发流程、技术、工具、经验等规范化、标准化
+    link: /src/engineering
+  - title: 微信小程序
+    details: 微信小程序是微信团队开发的一款轻量级的应用程序,它基于微信运行的环境,无需安装即可使用
     link: /src/wxprogram
+  - title: Uniapp
+    details: Uniapp是一个使用Vue.js开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台
+    link: /src/uniapp
 ---

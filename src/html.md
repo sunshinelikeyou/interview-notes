@@ -1,7 +1,7 @@
 # Html Part
 [[toc]]
 ## html 常见的块标签，行内标签，单标签分别有哪些，有何区别？ <Badge type="tip" text="primary" />
-::: details answer *[参考链接](https://juejin.cn/post/7359567256592449571)*
+::: details 回答 *[参考链接](https://juejin.cn/post/7359567256592449571)*
 特性 | 块级元素 | 行内元素
 -|-|-
 布局 | 通常开始于新的一行 | 在同一行内水平排列
@@ -22,7 +22,7 @@
 可以通过display属性来设置块级元素和行内元素的显示方式
 :::
 ## 常见的盒模型有哪些？有什么区别？ <Badge type="tip" text="primary" />
-::: details answer
+::: details 回答
 属性 | 标准盒模型 | IE盒模型 (怪异盒模型)
 -|-|-
 box-sizing | content-box | border-box
@@ -31,7 +31,7 @@ height | content | content + padding-top + padding-bottom + border
 
 :::
 ## h5 新特性  <Badge type="tip" text="primary" />
-::: details answer *[参考链接](https://blog.csdn.net/weixin_62421736/article/details/139924871)*
+::: details 回答 *[参考链接](https://blog.csdn.net/weixin_62421736/article/details/139924871)*
 1. 语义元素
 - \<article>，\<section>，\<nav>，\<aside>，\<header>，\<footer> 等元素，提供了更多的网页结构信息，使内容更加语义化。
 2. 表单改进

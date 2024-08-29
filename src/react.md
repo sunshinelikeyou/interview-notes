@@ -1,6 +1,6 @@
 # React Part
 ## 简述React的生命周期
-::: details answer <Badge type="tip" text="primary" />
+::: details 回答 <Badge type="tip" text="primary" />
 
 Reat组件的生命周期分为三个阶段：MOUNTING、RECEIVE_PROPS、UNMOUNTING
 - 组件挂载时（组件状态的初始化。读取初始state和props以及两个生命周期方法，只会再初始化时运行一次）
@@ -22,7 +22,7 @@ Reat组件的生命周期分为三个阶段：MOUNTING、RECEIVE_PROPS、UNMOUNT
     1. componentWillUnmount 会在组件卸载和销毁之前直接调用
 :::
 ## React组件传值有哪些方式
-::: details answer <Badge type="tip" text="primary" />
+::: details 回答 <Badge type="tip" text="primary" />
 - 父组件向子组件传值：通过props传递
 - 子组件向父组件传值：通过回调函数传递
 - 跨级组件传值：通过context传递

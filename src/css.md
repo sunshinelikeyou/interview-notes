@@ -1,7 +1,7 @@
 # CSS Part
 [[toc]]
 ## 什么是margin塌陷，margin合并，如何避免 <Badge type="tip" text="primary" />
-::: details 回答 [参考链接](https://blog.csdn.net/Celester_best/article/details/127455732)
+::: details 展开查看 [参考链接](https://blog.csdn.net/Celester_best/article/details/127455732)
 - margin塌陷（父子元素）：当一个元素有margin值，并且这个元素的父级元素没有边框、内边距和外边距时，那么这个元素的margin会设置到父级元素上。
 >现象：第一个蓝色盒子与顶部的距离应该只是example元素的padding值20px, 而实际上是20px+50px，因为蓝色盒子里面的白色盒子设置了margin-top: 50px; 塌陷到蓝色盒子上了。    
 >解决：给蓝色盒子设置一个边框或者内边距。或者触发[BFC](#什么是bfc-如何触发) 
@@ -18,8 +18,17 @@
 >现象：第二个蓝色盒子与顶部的距离应该是20px+50px，但实际上是50px，因为蓝色盒子设置的margin-top: 50px; 合并到第一个蓝色盒子上了。   
 >解决：触发蓝色盒子[BFC](#什么是bfc-如何触发) 
 :::
+## 什么是重绘，回流，如何避免 <Badge type="tip" text="primary" />
+::: details 展开查看
+>重绘(repaint)：当元素样式改变时，浏览器会根据样式重新绘制该元素。如颜色，背景色的变化。   
+>回流(reflow)：当DOM结构发生变化时，浏览器需要重新计算元素的布局。如添加或删除元素，位置改变等。
+
+::: info 注意
+回流必定导致重绘，而重绘不会引起回流。
+:::
+
 ## 什么是BFC，如何触发 <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 - 概念：BFC（Block Formatting Context）块级格式化上下文，它规定了内部的块级元素如何布局，并且与这个块级元素外部毫不相干。
 - 特性：
     1. 内部的Box会在垂直方向上一个接一个的放置。
@@ -35,7 +44,7 @@
      5. body 根元素
 :::
 ## css3有哪些新特性 <Badge type="tip" text="primary" />
-::: details 回答 [参考链接](https://blog.csdn.net/Feng_warm/article/details/140721144)
+::: details 展开查看 [参考链接](https://blog.csdn.net/Feng_warm/article/details/140721144)
 1. 新增选择器
     - 属性选择器：允许根据元素的属性及属性值来选择元素，例如 [type=“text”]
     - 伪类选择器：用于定义元素的特殊状态，如 :hover、:active、:visited等。
@@ -70,14 +79,14 @@
     - 一个二维布局系统，用于通过创建复杂的网格和对齐内容来布局网页。
 :::
 ## 浏览器渲染网页的过程 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 1. 解析HTML，构建DOM树。
 2. 解析CSS，构建CSSOM树。
 3. 将DOM树和CSSOM树合并成渲染树。
 4. 根据渲染树进行绘制。
 :::
 ## 浏览器输入URL发生了什么 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 - URL 解析
 - DNS 查询
 - TCP 连接

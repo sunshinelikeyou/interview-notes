@@ -2,3 +2,7 @@ summary {
     display: flex;
     justify-content: space-between;
 }
+
+.vp-doc h2>.VPBadge {
+    vertical-align: middle;
+}

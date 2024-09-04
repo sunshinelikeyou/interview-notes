@@ -1,11 +1,11 @@
 # Vue Part
 [[toc]]
 ## 什么是MVVM模型？和MVC有什么区别？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 >MVVM是Model-View-ViewModel的缩写。它是一种基于前端开发的架构模式，m表示模型（model），v表示视图（view），vm是视图模型（view-model）的缩写，用于连接视图和数据。和MVC架构不同的是，它采用双向绑定，数据的变化会自动更新到视图，视图的变化也会自动更新到数据。用户只需要关注数据的变化，而不需要手动操作DOM。降低耦合，有利于前后端分离开发。
 :::
 ## vue的生命周期有哪些？各个生命周期的作用是什么？ <Badge type="tip" text="primary" />
-::: details 回答 
+::: details 展开查看 
 vue2生命周期 | vue3生命周期 | 调用时机
 -|- |-
 beforeCreate| setup | 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -19,7 +19,7 @@ destroyed | onUnmounted | 实例销毁后调用。调用后，Vue 实例指示�
 
 :::
 ## vue中computed和watch的区别是什么？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 名称 | 作用 | 区别
 --- | --- | --- 
 computed | 计算属性 | 计算属性值会基于其响应式依赖被缓存,只有依赖值发生变化才会重新计算,Getter 不应有副作用,避免直接修改计算属性值
@@ -27,14 +27,22 @@ watch | 监听属性 | 不缓存,监听属性值的变化,更改 DOM，动画效
 function | 方法 | 不依赖收集，不缓存
 :::
 ## vue的组件通信有哪些方式？都在什么场景下使用？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 场景 | 通信方式 
 --- | --- 
 父子组件 | props、$emit、$parent、$children、ref、provide、inject
 兄弟组件 | eventBus、vuex、pinia、mitt
 :::
+## nextTick 的作用是什么？他的实现原理是什么？
+:::details 展开查看
+>作用：在下一次 DOM 更新循环结束之后执行延迟回调。在 Vue 中，数据的变化会触发重新渲染 DOM，但实际上，Vue 的数据更新是异步的。也就是说，当我们修改了 Vue 实例的数据后，并不会立即进行 DOM 更新，而是在下一个事件循环中才会进行。Vue 会对进行多次数据变化进行合并，然后在下一个事件循环中进行一次性的 DOM 更新，从而减少不必要的 DOM 操作，提高性能
+>实现原理：nextTick的实现原理是使用了宏任务和微任务的异步队列。 Promise, MutationObserver, setImmediate(node环境下),setTimeout
+
+::::
+
+
 ## vue的双向数据绑定原理是什么？为什么vue3的性能更好？diff算法，ast 模板解析 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 vue2双向数据绑定是通过Object.defineProperty()来实现的。vue2通过递归遍历所有属性，给每个属性添加getter和setter方法。通过getter和setter方法来监听数据变化，当数据发生变化时，触发对应属性的setter方法，从而改变对应的DOM。对于对象属性的新增和删除，vue2无法监听到变化。只能通过vue.set()方法来新增和删除属性。 数据劫持 =》 依赖收集 =》 视图更新   
 vue3通过proxy实现，proxy比defineProperty更优。Proxy可以直接监听数组和嵌套对象的变化，在初次渲染和更新时减少了需手动递归处理的性能开销。
 

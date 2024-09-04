@@ -42,4 +42,7 @@ features:
   - title: Uniapp
     details: Uniapp是一个使用Vue.js开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台
     link: /src/uniapp
+  - title: 算法
+    details: 算法是计算机科学的基础，它描述了一种解决问题的清晰指令集
+    link: /src/algorithm
 ---

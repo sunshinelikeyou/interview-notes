@@ -1,7 +1,7 @@
 # TypeScript Part
 [[toc]]
 ## ts中type 和 interface 的区别？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
  名称 | 区别
  --- | ---
  type | 可以定义原始值、联合类型、交叉类型，元组等类型，重复定义同一个名称的类型会报错，只能通过&进行合并
@@ -9,14 +9,14 @@
  >一般来说，如果不清楚什么时候用interface/type，能用 interface 实现，就用 interface , 如果不能就用 type 。
 :::
 ## ts中const和readonly的区别是什么？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
  名称 | 使用场景 | 检查时机 | 区别
  --- | --- | --- | ---
  const | 用于变量声明 | 运行时 | const变量保存的数组，可以使用push，pop等方法
  readonly | 用于属性声明 | 编译时 | 使用ReadonlyArray声明的数组不能使用push，pop等方法
 :::
 ##  ts中的类型有哪些？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
  分类 | 类型
  --- | --- 
  基本类型 | number, string, boolean, null, undefined
@@ -26,7 +26,7 @@
 
 :::
 ## ts中的协变（Covariance），逆变（Contravariance），双变（Bivariance）和抗变（Invariance ）是什么？ <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 名称 | 区别 | 应用场景
 --- | --- | ---
 协变 | 协变意味着子类型可以赋值给父类型 | 数组类型是协变的，因此可以将子类型的数组赋值给父类型的数组

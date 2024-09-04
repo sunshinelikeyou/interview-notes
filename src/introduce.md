@@ -4,7 +4,20 @@
 希望你将来会变得更好！  
 祝你好运！
 
-难度等级:
-<Badge type="tip" text="primary" />
-<Badge type="warning" text="middle" />
-<Badge type="danger" text="senior" />
+
+::: tip 难易程度    
+<span class="ml-30">基础：<Badge type="tip" text="primary" /></span>
+<span class="ml-30">中等：<Badge type="warning" text="middle" /></span> 
+<span class="ml-30">高级：<Badge type="danger" text="senior" /></span>
+:::
+
+<style>
+    .vp-doc .custom-block{
+        display: flex;
+        align-items: center;
+    }
+    .ml-30 {
+        margin-left: 30px
+    }
+</style>
+

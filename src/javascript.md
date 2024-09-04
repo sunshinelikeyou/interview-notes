@@ -1,7 +1,7 @@
 # Javascript Part
 [[toc]]
 ## js数据类型有哪些？都存储在内存的什么位置？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 数据类型 | 类型 | 存储位置
 -|-|-
 基本类型 | Number（-2^53 ~ 2^53）、String、Boolean、Null、Undefined、Sybmol、BigInt | 栈
@@ -12,8 +12,43 @@
 - 基础数据类型比较稳定，而且相对来说占用的内存小。
 - 引用数据类型大小是动态的，而且是无限的。
 :::
-## es6 新增数据类型 Set WeakSet Map WeakMap 是什么，如何使用 <Badge type="tip" text="primary" />
-::: details 回答
+
+## JS function 传参按什么传递 <Badge type="tip" text="primary" />
+::: details 展开查看
+- 在JavaScript中，函数的参数是通过值传递的。这意味着当你调用一个函数并为其传递参数时，函数接收的是参数值的一个副本，而不是原始的值本身。这种传递方式被称为“按值传递”;   
+- 如果函数参数是对象，那么传递的是对象的引用地址，但是在函数内部对该参数对象的修改将不会影响函数外部的原始对象，因为它们引用的是同一个对象实例。
+```js
+function fn(param) {
+  param.key = 2; // 情况1：会改变原对象， 修改参数的属性值，参数使用的是传递的实参的引用地址，
+  param = { key: 3 }; // 情况2：不会改变原对象， 引用地址改变了
+}
+const obj = { key: 1 }
+fn(obj);
+console.log(obj); // { key: 2 }
+```
+:::
+## Script 的 async 和 defer 的区别？ <Badge type="tip" text="primary" />
+::: details 展开查看
+ ```js
+<script src='a.js'></script> 
+问题1：下载 a.js 的过程，是否会停止 html 渲染？ 会
+问题2：下载 a.js 完之后是否会立即执行？会
+<script src="b.js" async></script>
+问题1：下载 b.js 的过程，是否会停止 html 渲染？ 异步下载，不会
+问题2：下载 b.js 完之后是否会立即执行？会
+<script src="c.js" defer></script>
+问题1：下载 c.js 的过程，是否会停止 html 渲染？ 异步下载，不会
+问题2：下载 c.js 完之后是否会立即执行？不会 什么时候执行？html 解析完成
+ ```
+ 名称 | 加载时机 | 执行顺序 | 使用场景
+ -|-|- | -
+ 普通 | 同步加载 | 阻塞页面执行  | 需要立即执行
+ async(异步) | async 属性告诉浏览器立即下载脚本，并且一旦下载完成，就立即执行脚本，而不等待页面中的其他脚本或文档解析完成。 | 由于脚本是异步加载的，因此不能保证脚本按照它们在HTML中出现的顺序执行。这意味着，如果两个脚本都使用了 async 属性，那么它们的执行顺序可能是不确定的。| async 属性适用于那些不依赖于页面其他脚本或DOM元素的独立脚本。
+ defer（延迟） | defer 属性也会告诉浏览器异步加载脚本，但与 async 不同的是，脚本会等待整个文档被解析完成后（DOMContentLoaded事件触发前），再按照它们在HTML中出现的顺序执行。 | 使用 defer 属性的脚本会按照它们在HTML文件中出现的顺序执行，这对于那些依赖于页面其他脚本或DOM元素的脚本来说非常重要。| defer 属性适用于那些需要等待DOM完全加载和解析后才能执行的脚本，特别是那些操作DOM或依赖于DOM元素的脚本。
+:::
+
+## es6 新增数据类型 Set WeakSet Map WeakMap如何使用 <Badge type="tip" text="primary" />
+::: details 展开查看
 数据类型 | 键可允许类型 | 值可允许类型 | 是否可用for of迭代 | 是否可转数组 | 方法
 -|-|- |- | - | -
 Set | 无 | 任何值 | 是 | 是 | add、delete、has、clear、size(属性)、forEach、entries、values、keys、intersection、union、difference
@@ -26,8 +61,15 @@ WeakMap | 对象 | 任何值 | 是 | 否| set、get、has、delete
 - 基础数据类型比较稳定，而且相对来说占用的内存小。
 - 引用数据类型大小是动态的，而且是无限的。
 :::
-## js 数组和伪数组的区别，常见的伪数组有哪些？如何转换成数组<Badge type="tip" text="primary" />
-::: details 回答
+## 数组和伪数组的区别,常见的伪数组有哪些,如何转换成数组<Badge type="tip" text="primary" />
+::: details 展开查看
+>区别   
+
+名称 | 原型链 | 方法使用 | 定义   
+-| - | - | -  
+数组 | Array.prototype | push、pop、shift、unshift、splice、sort、reverse、concat、slice、join等 | 数组是一种特殊的对象，其属性由数字索引和值组成，并且拥有一个特殊的.length属性    
+伪数组 | Object.prototype | 通过Array.prototype上的方法间接使用 |也称为类数组对象, 是那些具有.length属性但没有继承Array.prototype上方法的对象,伪数组可以像数组那样通过索引来访问元素，但它不能使用数组的方法
+
 >常见的伪数组
 - arguments
 - DOM操作返回的 NodeList， HTMLCollection
@@ -39,7 +81,7 @@ WeakMap | 对象 | 任何值 | 是 | 否| set、get、has、delete
 - $('div').get();
 :::
 ##  如何判断数据类型，有何区别 <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 方式 | 区别
 -|-
 typeof var | 返回值有string、number、boolean、undefined、function、object、symbol,只能判断基本类型和函数，null和引用类型都返回object
@@ -48,7 +90,7 @@ var.constructor === constructor | 返回值有Function、Array、Date、RegExp�
 Object.prototype.toString.call(var) | 返回值有[object Object]、[object Array]、[object Date]、[object RegExp]、[object Function]、[object Boolean]、[object Number]、[object String]、[object Symbol] 可以判断引用类型的具体类型
 :::
 ##  数组的常用方法有哪些，改变原数组的有哪些 <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 方法 | 用法 | 是否改变原数组 | 返回值 | 传参
 -|-|-|- | -
 push | 尾加| 是 | newLength | （item）
@@ -76,7 +118,7 @@ findIndex |查找下标 | 否 | itemIndex | （item，index，arr）
 reduce |累积操作 | 否 | initV | （cb(pre，cur，index?，arr? ), initV?）
 :::
 ## 如何实现数组去重，如何实现数组扁平化？ <Badge type="tip" text="primary" />
-::: details 回答
+::: details 展开查看
 > 数组去重
 ```js
 // 基本类型数组
@@ -146,7 +188,7 @@ function flat(obj, path = '', res = {}, isArray) {
 :::
 ##  常见的数组排序方法有哪些，各自的时间复杂度是多少 <Badge type="warning" text="middle" />
 
-::: details 回答
+::: details 展开查看
 >冒泡排序
 ```js
 function bubbleSort(arr) {
@@ -203,10 +245,72 @@ selectSort ([4,2,5,1,3]) // [1, 2, 3, 4, 5]
 >希尔排序   
 >归并排序   
 >堆排序   
+:::
+##  Object.keys 和 Reflect.ownKeys 的区别？ <Badge type="warning" text="middle" />
+::: details 展开查看
+名称 | 功能 | 返回值 | 用途
+-- | -- | -- | -- 
+Object.keys() | 获取对象自身可枚举属性的数组 | 返回一个数组，数组中包含的是对象自身的可枚举属性键（字符串） | 主要用于遍历对象的可枚举属性，或者获取对象可枚举属性的键名数组     
+Reflect.ownKeys() | 获取对象自身的所有属性（字符串和Symbol） |返回一个数组，数组中包含的是对象自身的所有键（字符串和 Symbol），不考虑枚举性 | 用于获取对象自身的所有键（包括不可枚举的属性键和 Symbol 类型的键（判断对象是否为空数组）
+```js
+const obj = {
+  a: 1,
+  [Symbol('b')]: 2,
+  c: 3,
+  d: undefined,
+  e: null,
+  f: function() {},
+};
+
+Object.defineProperty(obj, 'g', {
+  value: 4,
+  enumerable: false,
+});
+
+console.log(Object.keys(obj));  // ["a", "c", "d", "e", "f"]
+console.log(Reflect.ownKeys(obj));  // ['a', 'c', 'd', 'e', 'f', 'g', Symbol(b)]
+// 注意："b" 是一个 Symbol 类型的键，而 "g" 是一个不可枚举的键
+```
 
 :::
+
+## ES6 的Proxy ，Reflect分别是什么，什么场景使用？ <Badge type="warning" text="middle" />
+::: details 展开查看
+- Proxy 是 ES6 引入的一个新的内置对象，用于定义某些操作的自定义行为（如属性查找、赋值、枚举、函数调用等）;
+- Reflect 是一个内置对象，它提供了一系列与对象操作相关的方法，这些方法在功能上与 Object 对象的某些方法相似，但 Reflect 的设计初衷是提供更统一和更方便的操作接口
+```js
+// 应用 Proxy 实现数据倒序访问，
+// 如： const  arr=[1, 2, 3, 4]; arr[-1] 返回 4，arr[-2] 返回 3。
+// 具体实现代码：
+let arr = [1,2,3,4];
+const p = new Proxy(arr, {
+     get (target, key, receiver) {
+        if(!Array.isArray(target)) throw new Error('代理目标不是数组');
+         const len = target.length;
+         key = + key;
+         let i;
+         if(key> len - 1) {
+           throw new Error('超出数组范围')
+         } else if(key < 0) {
+            if(Math.abs(key) <= len) {
+                i = len + key
+            } else {
+                throw new Error('超出数组范围')
+            }
+         } else {
+            i = key
+         }
+         return Reflect.get(target, i,receiver)
+     }
+})
+
+
+```
+
+:::
+
 ##  手写一个对象的深拷贝方法，考虑循环引用，栈溢出的情况 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 ```js
 function deepClone(obj, map = new WeakMap()) {
     if(typeof obj !== 'object' || obj === null) return obj;
@@ -227,7 +331,7 @@ deepClone({a:1,b:[2,{c:3}]});
 ```
 :::
 ##  树，数组数据格式互相转换 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 >树转数组
 ```js
 let tree = [
@@ -289,14 +393,14 @@ function arrToTree(arr) {
 ```
 :::
 ##  路由模式history，hash模式的区别，原理，实现方式 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 模式 | 原理 | 实现方式| 优点 | 缺点
 ---|---|---|--- | ----
 hash | 监听location对象hash值的变化来实现页面部分的更新，通过改变hash值来达到切换路由的效果 | 主要通过window.onhashchange事件监听hash值的变化，当hash值改变时，更新页面内容 | 兼容性好 | 地址栏中会显示 #，不利于SEO优化
 history | 使用浏览器的History API来管理路由，可以在不重新加载页面的情况下修改URL | 通过监听window的popstate事件，通过pushState和replaceState改变url，但是不会触发页面刷新 | 美观 | 不兼容IE9
 :::
 ##  call,apply,bind 的作用，手写一个call,apply,bind方法 <Badge type="warning" text="middle" /> 
-::: details 回答
+::: details 展开查看
 *call和apply都是为了改变某个函数中this的指向，call和apply的区别在于传参的方式不同*
 >call 实现
 ```js
@@ -347,12 +451,12 @@ aaa.myBind(obj,1)();
 
 :::
 ##  说说堆，栈区别特点 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 >栈(stack)是一种遵循后进先出（LIFO）原则的有序集合。新添加的或待删除的元素都保存在栈的同一端，称作栈顶，另一端就叫栈底。   
 >JavaScript中的堆（Heap）是一块用于存储动态分配内存的区域。在这个堆里，我们可以存储复杂的数据结构，比如对象和数组。不同于栈（Stack），堆的大小不是固定的，而是可以根据需要动态扩展
 :::
 ##  什么是防抖，什么是节流，有何区别，实现节流，防抖函数 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 名称 | 定义 | 场景
 ---|--- | --- 
 防抖 | 确保在指定的时间间隔结束后执行一次函数。如果在这段时间内多次触发事件，则只有最后一次事件会在延迟后执行函数。（回城） | 搜索框输入、表单验证
@@ -374,13 +478,12 @@ function debounce(fn, delay) {
 >节流实现
 ```js
 function throttle(fn, delay) {
-    let flag = false;
+    let timer = null;
     return  (...args) => {
         if(!flag) {
-            flag = true;
-            setTimeout(() => {
+         timer = setTimeout(() => {
                 fn.apply(this, args);
-                flag = false;
+                timer = null;
             }, delay);
         }
     }
@@ -410,7 +513,7 @@ new Promise(function(resolve) {
 });
 console.log('script end');
 ```
-::: details 回答
+::: details 展开查看
 1. script start   
 2. async1 start   
 3. async2   
@@ -426,7 +529,7 @@ console.log('script end');
 
 :::
 ##  什么是闭包，闭包的优缺点，使用场景 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 - 闭包是指那些能够访问独立(自由)变量的函数(变量在本地使用, 但定义在一个封闭的作用域中). 换句话说, 这些函数可以「记忆」它被创建时候的环境. -- MDN      
 - 闭包是有权访问另一个函数作用域的函数. -- 《JavaScript 高级程序设计(第 3 版)》      
 - 函数对象可以通过作用域链相互关联起来, 函数体内部的变量都可以保存在函数作用域内, 这种特性在计算机科学文献中称为闭包. -- 《JavaScript 权威指南(第 6 版)》     
@@ -435,7 +538,7 @@ console.log('script end');
 >缺点：内存占用，性能损耗
 :::
 ##  说说垃圾回收机制 <Badge type="warning" text="middle" />
-::: details 回答 [参考链接](https://juejin.cn/post/7173644980240515085?searchId=20240821104155F4B5956AB80C8E3BFB6E)
+::: details 展开查看 [参考链接](https://juejin.cn/post/7173644980240515085?searchId=20240821104155F4B5956AB80C8E3BFB6E)
 方式 | 定义 | 规则 | 优点 | 缺点
 -| - | - | - | - 
 引用计数法 | 引用计数（Reference Counting）算法通过跟踪每个对象被引用的次数来确定对象是否为垃圾 |  每个对象都有一个引用计数器，当一个对象被创建时，其引用计数器初始化为1，当该对象被其他对象引用时，引用计数器加1， 当该对象不再被其他对象引用时，引用计数器减1， 当引用计数器减至0时，意味着该对象不再被引用，可以被垃圾收集器回收 | 实时回收 | 循环引用，计数开销        
@@ -445,13 +548,13 @@ console.log('script end');
 
 :::
 ##  什么是原型，原型链是如何产生的，原型链的查找机制  <Badge type="warning" text="middle" />
-::: details 回答 [参考链接](https://blog.csdn.net/m0_55734030/article/details/127971640)
+::: details 展开查看 [参考链接](https://blog.csdn.net/m0_55734030/article/details/127971640)
 >显示原型：每一个类（构造函数）都有一个显示原型prototype（本质就是个对象）   
 >隐式原型：每一个实例对象都有一个隐式原型__proto__，指向构造函数的原型prototype   
 >原型链：查找对象实例的方法和属性时，先在自身找，找不到则沿着__proto__（可以通过Object.getPrototypeOf(obj)获取实例原型）向上查找，我们把查找__proto__形成的链条关系称原型链（实现了js继承）
 :::
 ##  js的继承方式有哪些，如何实现继承 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 - 原型链继承
 - 构造函数继承
 - 组合继承（原型链加构造函数）
@@ -462,7 +565,7 @@ console.log('script end');
 - ES6 的 Proxy 和 Reflect 实现继承
 :::
 ## IntersectionObserver, MutationObserver, ResizeObserver API 是做什么的，如何使用 <Badge type="warning" text="middle" />
-::: details 回答
+::: details 展开查看
 名称 | 定义 | 应用场景 | 优点 
 -| - | - | - 
 IntersectionObserver | 用于监听元素是否进入视口，进入视口时触发回调函数 | 懒加载，图片预加载，虚拟列表，实现无限滚动 | 监听不随着目标元素的滚动而触发，性能消耗极低。 
@@ -543,9 +646,10 @@ const observer = new ResizeObserver(entries => {
 })
 observer.observe(document.getELementById('target'))
 ```
+:::
 
 ## 手撕：写一个高阶函数，第一个参数传递一个函数，第二个参数传递执行的次数，第三个参数传递时间间隔，要求它返回一个新的函数，调用新函数时，它每个时间间隔执行对应的参数函数，执行一定次数后结束。 <Badge type="warning" text="middle" />
-::: details 回答 
+::: details 展开查看 
 ```js
 function timer(fn, times = 3, interval = 3000) {
      return  (...arg) => {
@@ -560,7 +664,7 @@ function timer(fn, times = 3, interval = 3000) {
 :::
 
 ## 函数柯里化 <Badge type="warning" text="middle" />
-::: details 回答  [参考链接](https://blog.csdn.net/2301_78542842/article/details/140484283)
+::: details 展开查看  [参考链接](https://blog.csdn.net/2301_78542842/article/details/140484283)
 >函数柯里化是指将一个多参数的函数转换成多个单参数函数，并且返回一个新的函数。
 > 实现
 ```js
@@ -636,15 +740,15 @@ console.log(validateNumber("10")); // 输出 false
 - 优点：提高函数复用性，延迟执行，参数复用
 - 缺点：难以理解和维护，性能影响
 :::
-:::
+
 ##  如何实现大文件上传，如何实现分片上传,如何实现断点续传 <Badge type="danger" text="senior" />
-::: details 回答  [参考链接](https://juejin.cn/post/7312723512723488822?searchId=202408261110269E84D48A929E3B5265E6)
+::: details 展开查看  [参考链接](https://juejin.cn/post/7312723512723488822?searchId=202408261110269E84D48A929E3B5265E6)
 - 计算文件MD5,需要用到 ‘spark-md5’依赖包，直接 npm i spark-md5 即可
 - 文件分片，用到文件的 “slice” api,将文件进行切割
 - 调用服务端主要是为了确认相同文件是否上传，如果已有MD5证明已经上传过，接着上传之前失败的分片
 :::
 ##  如何一次性渲染十万条数据还能保证页面不卡顿 <Badge type="danger" text="senior" />
-::: details 回答 
+::: details 展开查看 
 >时间分片，下拉太快会有闪屏  [参考链接](https://juejin.cn/post/7354940230301057033)
 ```js
 function timeSlice (total = 100000, once = 20, ul = document.getElementById("container");) {

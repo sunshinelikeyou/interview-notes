@@ -12,6 +12,26 @@
 - 基础数据类型比较稳定，而且相对来说占用的内存小。
 - 引用数据类型大小是动态的，而且是无限的。
 :::
+##  ES6是什么？新增的功能特性有哪些？ <Badge type="tip" text="primary" />
+::: details 展开查看 <p>[参考链接1](https://blog.csdn.net/qq_39540458/article/details/140987269) [参考链接2](https://es6.ruanyifeng.com/#docs/let)</p> 
+>概念：ECMAScript 6（简称ES6）是于2015年6月正式发布的JavaScript语言的标准，正式名为ECMAScript 2015（ES2015）。     
+#### 新增的功能特性：
+- let、const 关键字: 引入了块级作用域的变量声明方式，let用于可重新赋值的变量，而const用于声明常量，避免了变量提升的问题。    
+- 模板字符串: 使用反引号（`）和${}来嵌入表达式，简化了字符串的拼接操作，并且支持多行字符串。    
+- 箭头函数: 提供了更简洁的函数书写方式，并且没有自己的this上下文，通常用于回调函数。
+- 解构赋值: 允许从数组或对象中快速提取值并分配给变量，简化了数据的交换和属性的提取。
+- 函数默认参数:允许在函数定义时为参数提供默认值，使得函数调用更为灵活。
+- 扩展运算符:用于将数组或对象的元素展开到新的数组或对象中，简化了数组和对象的操作。
+- 类:虽然JavaScript是基于原型的语言，但ES6的类语法为面向对象的编程提供了更为清晰和结构化的方式。
+- 模块化: 原生支持模块的导入（import）和导出（export），促进了代码的模块化和重用。
+- Promise对象: 为异步编程提供了一种更加优雅和强大的处理方式，避免了回调地狱问题。
+- Symbol类型: 引入了一种新的原始数据类型，Symbol值是唯一的，常用于对象属性的键。
+- Map、Set数据结构:提供了新的数据结构，Map类似于对象，但可以有更复杂的键类型；Set用于存储唯一的值。
+- 迭代器和生成器:：提供了一种遍历器接口，允许对数据集合进行更细粒度的遍历控制，而生成器允许你以懒加载的方式生成数据。
+- Proxy和Reflect API:提供了对对象的代理机制和反射操作，使得开发者可以自定义对象的行为。
+- 新的字符串，数组和对象方法: 如String.includes(),String.startsWidth(), Array.from(), Array.of(), Object.assign(), Object.is()等，这些方法提供了更多的数组和对象操作能力。
+:::
+
 
 ## JS function 传参按什么传递 <Badge type="tip" text="primary" />
 ::: details 展开查看
@@ -48,18 +68,15 @@ console.log(obj); // { key: 2 }
 :::
 
 ## es6 新增数据类型 Set WeakSet Map WeakMap如何使用 <Badge type="tip" text="primary" />
-::: details 展开查看
-数据类型 | 键可允许类型 | 值可允许类型 | 是否可用for of迭代 | 是否可转数组 | 方法
--|-|- |- | - | -
-Set | 无 | 任何值 | 是 | 是 | add、delete、has、clear、size(属性)、forEach、entries、values、keys、intersection、union、difference
-WeakSet | 无 | 对象 | 是 | 否 | add、delete、has
-Map | 任何值 | 任何值 | 是 | 是 | set、get、has、delete、clear、size(属性)、forEach、entries、values、keys
-WeakMap | 对象 | 任何值 | 是 | 否| set、get、has、delete
->堆和栈的区别
-- 堆比栈空间大，栈比堆运行速度快。
-- 堆内存是无序存储，可以根据引用直接获取。
-- 基础数据类型比较稳定，而且相对来说占用的内存小。
-- 引用数据类型大小是动态的，而且是无限的。
+::: details 展开查看 [参考链接](https://juejin.cn/post/7183237715217874999?searchId=20240905173514257739D41874E42BAE44)
+数据类型 | 键可允许类型 | 值可允许类型 | 是否可转数组 | 方法
+-|-|- |- | -
+Set | 无 | 任何值  | 是 | add、delete、has、clear、size(属性)、forEach、entries、values、keys、intersection、union、difference
+WeakSet | 无 | 对象或Symbol值  | 否 | add、delete、has
+Map | 任何值 | 任何值 | 是 | set、get、has、delete、clear、size(属性)、forEach、entries、values、keys
+WeakMap | 对象或Symbol值 | 任何值  | 否| set、get、has、delete
+::: tip 提示
+- WeakSet 的值， WeakMap 键对某个对象的引用,不会影响其垃圾回收,如果引用的键被垃圾回收清除掉了,其对应的 键/值对 也会被清除掉，能用WeakMap,WeakSet 尽量用，WeakMap,WeakSet不可遍历
 :::
 ## 数组和伪数组的区别,常见的伪数组有哪些,如何转换成数组<Badge type="tip" text="primary" />
 ::: details 展开查看
@@ -480,7 +497,7 @@ function debounce(fn, delay) {
 function throttle(fn, delay) {
     let timer = null;
     return  (...args) => {
-        if(!flag) {
+        if(!timer) {
          timer = setTimeout(() => {
                 fn.apply(this, args);
                 timer = null;

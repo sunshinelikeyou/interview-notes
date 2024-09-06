@@ -6,7 +6,7 @@ hero:
   text: "记录前端常见面试题"
   actions:
     - theme: brand
-      text: Markdown Notes
+      text: Markdown 语法
       link: /markdown-notes
     - theme: alt
       text: API Examples

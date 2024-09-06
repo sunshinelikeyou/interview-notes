@@ -53,10 +53,11 @@ plugin | 用于对整个构建过程进行干预 | 打包优化、资源管理�
 
 ## Webpack的Tree Shaking原理 <Badge type="warning" text="middle" />
 ::: details 展开查看
->概念：Tree Shaking 是一个利用ES6模块静态结构特性[^1]来去除生产环境下不必要代码的优化过程
->原理： 1.当Webpack分析代码时，它会标记出所有的import，export语句
-        2. 然后，当Webpack确定某个模块没有被导入时，它会在生成的bundle中排除这个模块的代码
-        3.Webpack、还会进行递归的标记清理，以确保所有未使用的依赖项都不会出现在最终的bundle中  
+>概念：Tree Shaking 是一个利用ES6模块静态结构特性[^1]来去除生产环境下不必要代码的优化过程   
+>原理： 
+1. 当Webpack分析代码时，它会标记出所有的import，export语句   
+2. 然后，当Webpack确定某个模块没有被导入时，它会在生成的bundle中排除这个模块的代码
+3. Webpack、还会进行递归的标记清理，以确保所有未使用的依赖项都不会出现在最终的bundle中  
 ```js
 optimization: {
     usedExports: true,

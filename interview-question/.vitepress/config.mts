@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 import  footnote_plugin  from "markdown-it-footnote";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/interview-question/", // 部署站点的基础路径,根据你的部署环境调整
+  base: "/interview-notes/", // 部署站点的基础路径,根据你的部署环境调整
   lastUpdated: true,
   title: "Interview Question",
   description: "Record common front interview questions",

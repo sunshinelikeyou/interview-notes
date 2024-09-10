@@ -32,6 +32,17 @@
 - 新的字符串，数组和对象方法: 如String.includes(),String.startsWidth(), Array.from(), Array.of(), Object.assign(), Object.is()等，这些方法提供了更多的数组和对象操作能力。
 :::
 
+## new操作符的实现原理 ？ 
+::: details 展开查看
+```js
+function newFun(constructor, ...arg) {
+    const obj = Object.create(constructor.protorype);
+    const result =  constructor.apply(obj, arg);
+    return result && typof === 'object' ? result : obj;
+}
+```
+:::
+
 
 ## JS function 传参按什么传递 <Badge type="tip" text="primary" />
 ::: details 展开查看
@@ -422,7 +433,7 @@ history | 使用浏览器的History API来管理路由，可以在不重新加�
 >call 实现
 ```js
 Function.prototype.myCall = function (context, ...args) {
-     context = context || window;
+     context = context || globalThis;
      const fn = Symbol('当前函数');
      context[fn] = this;
      const result = context[fn](...args);
@@ -431,7 +442,7 @@ Function.prototype.myCall = function (context, ...args) {
 }
 let a = 'haha';
 let obj = {a: 'xixi'};
-function fn (...params) {
+function fn (params) {
     console.log(this.a, params);
 }
 fn.myCall(obj,1,2);
@@ -439,7 +450,7 @@ fn.myCall(obj,1,2);
 >apply 实现
 ```js
 Function.prototype.myApply = function (context, args) {
-     context = context || window;
+     context = context || globalThis;
      const fn = Symbol('当前函数');
      context[fn] = this;
      const result =  context[fn](...args);
@@ -756,6 +767,162 @@ console.log(validateNumber("10")); // 输出 false
 ```
 - 优点：提高函数复用性，延迟执行，参数复用
 - 缺点：难以理解和维护，性能影响
+:::
+
+## js中常见的设计模式   <Badge type="warning" text="middle" />
+::: details 展开查看 
+1. 单例模式：
+    - 定义：保证一个类只有一个实例，并提供一个访问它的全局访问点
+    - 场景：当需要频繁实例化然后销毁某个对象时，可以考虑使用单例模式，以减少内存使用和提高性能。例如，数据库连接池、线程池、全局状态管理等。
+    - 示例： 
+    ```js
+    class Singleton {
+        constructor() {
+            if (Singleton.instance) {
+            return Singleton.instance;
+            }
+            Singleton.instance = this;
+        }
+    }
+    const instance1 = new Singleton();
+    const instance2 = new Singleton();
+    console.log(instance1 === instance2); // 输出 true
+    ``` 
+2. 工厂模式： 
+    - 定义: 工厂模式是一种创建型设计模式，用来创建对象，根据不同的参数返回不同的对象实例。
+    - 场景：当需要创建一系列相似对象时，可以考虑使用工厂模式。工厂模式可以封装对象的创建过程，使得代码更加清晰和易于维护。
+    - 示例： 
+    ```js
+    class Car {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Bike {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class VehicleFactory {
+        static createVehicle(type, name) {
+            if (type === 'car') {
+            return new Car(name);
+            } else if (type === 'bike') {
+            return new Bike(name);
+            }
+            return null;
+        }
+    }
+    const car = VehicleFactory.createVehicle('car', 'Toyota');
+    const bike = VehicleFactory.createVehicle('bike', 'Honda');
+    console.log(car.name); // 输出 Toyota
+    console.log(bike.name); // 输出 Honda
+    ``` 
+3. 策略模式:
+    - 定义：策略模式是一种行为设计模式，它使得你能在一个上下文对象中动态改变其行为
+    - 场景：当需要在运行时根据条件动态选择算法或行为时，可以使用策略模式。例如，排序算法的选择、支付方式的选择等。
+    - 示例： 
+    ```js
+    interface Strategy {
+        execute(): string;
+    }
+
+    class ConcreteStrategyA implements Strategy {
+        execute(): string {
+            return 'Strategy A';
+        }
+    }
+
+    class ConcreteStrategyB implements Strategy {
+        execute(): string {
+            return 'Strategy B';
+        }
+    }
+
+    class Context {
+        constructor(private strategy: Strategy) {}
+        setStrategy(strategy: Strategy) {
+            this.strategy = strategy;
+        }
+        executeStrategy(): string {
+            return this.strategy.execute();
+        }
+    }
+
+    const context = new Context(new ConcreteStrategyA());
+    console.log(context.executeStrategy()); // 输出 Strategy A
+    context.setStrategy(new ConcreteStrategyB());
+    console.log(context.executeStrategy()); // 输出 Strategy B
+    
+    ```
+4. 观察者模式:
+    - 定义：观察者模式是一种行为设计模式，它定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象
+    - 场景：当一个对象的状态发生变化时，需要通知其他对象，可以使用观察者模式。例如，GUI中的事件处理、股票价格的变动通知等。
+    - 示例：
+    ```js
+    class Subject {
+        constructor() {
+            this.observers = [];
+        }
+        subscribe(observer) {
+            this.observers.push(observer);
+        }
+        unsubscribe(observer) {
+            this.observers = this.observers.filter(obs => obs !== observer);
+        }
+        notify(data) {
+            this.observers.forEach(observer => observer.update(data));
+        }
+    }
+
+    class Observer {
+        constructor(name) {
+            this.name = name;
+        }
+        update(data) {
+            console.log(`${this.name} received data: ${data}`);
+        }
+    }
+
+    const subject = new Subject();
+    const observer1 = new Observer('Observer 1');
+    const observer2 = new Observer('Observer 2');
+    subject.subscribe(observer1);
+    subject.subscribe(observer2);
+    subject.notify('Hello, Observers!'); // 输出 Observer 1 received data: Hello, Observers! 和 Observer 2 received data: Hello, Observers!
+    
+    ``` 
+5. 发布订阅模式:
+    - 定义：发布订阅模式是一种消息传递模式，类似于观察者模式，但是更加灵活。在发布订阅模式中，发布者发布消息到一个中间层（例如消息队列或事件总线），而订阅者则从这个中间层订阅并接收消息    
+    - 场景：与观察者模式类似，但更加灵活，允许发送者与接收者之间不存在直接依赖关系。例如，消息队列、事件总线等。
+    - 示例： 
+    ```js
+        class EventEmitter {
+            constructor() {
+                this.events = {};
+            }
+            on(eventName, callback) {
+                if (!this.events[eventName]) {
+                this.events[eventName] = [];
+                }
+                this.events[eventName].push(callback);
+            }
+            emit(eventName, data) {
+                if (this.events[eventName]) {
+                this.events[eventName].forEach(callback => callback(data));
+                }
+            }
+        }
+
+        const eventEmitter = new EventEmitter();
+        const callback1 = data => console.log('Callback 1 received data:', data);
+        const callback2 = data => console.log('Callback 2 received data:', data);
+        eventEmitter.on('event1', callback1);
+        eventEmitter.on('event1', callback2);
+        eventEmitter.emit('event1', 'Hello, Callbacks!'); // 输出 Callback 1 received data: Hello, Callbacks! 和 Callback 2 received data: Hello, Callbacks!
+    ```
 :::
 
 ##  如何实现大文件上传，如何实现分片上传,如何实现断点续传 <Badge type="danger" text="senior" />

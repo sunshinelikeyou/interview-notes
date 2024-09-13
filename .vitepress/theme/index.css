@@ -6,3 +6,19 @@ summary {
 .vp-doc h2>.VPBadge {
     vertical-align: middle;
 }
+
+/* 隐藏默认三角 chrome Safari*/
+details ::-webkit-details-marker {
+    display: none;
+}
+
+/*隐藏默认三角 Firefox*/
+details ::-moz-list-bullet {
+    font-size: 0px;
+}
+
+
+summary {
+    list-style: none;
+    /*部分老版浏览器需要这样写*/
+}

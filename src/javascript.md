@@ -425,7 +425,92 @@ function arrToTree(arr) {
 模式 | 原理 | 实现方式| 优点 | 缺点
 ---|---|---|--- | ----
 hash | 监听location对象hash值的变化来实现页面部分的更新，通过改变hash值来达到切换路由的效果 | 主要通过window.onhashchange事件监听hash值的变化，当hash值改变时，更新页面内容 | 兼容性好 | 地址栏中会显示 #，不利于SEO优化
-history | 使用浏览器的History API来管理路由，可以在不重新加载页面的情况下修改URL | 通过监听window的popstate事件，通过pushState和replaceState改变url，但是不会触发页面刷新 | 美观 | 不兼容IE9
+history | 使用浏览器的History API来管理路由，可以在不重新加载页面的情况下修改URL | 通过监听window的popstate事件，通过pushState和replaceState改变url，但是不会触发页面刷新 | 美观 | 不兼容IE9,需要服务器端配置   
+
+eg. hash模式
+```html
+    <ul id="menu">
+        <li>
+            <a href="#index" rel="external nofollow" >首页</a>
+        </li>
+        <li>
+            <a href="#news" rel="external nofollow" >资讯</a>
+        </li>
+        <li>
+            <a href="#user" rel="external nofollow" >个人中心</a>
+        </li>
+      </ul>
+    <div id="app">
+    </div>
+```
+```js
+     window.addEventListener('hashchange', function (e) {
+        let app = document.getElementById('app')
+        switch (location.hash) {
+            case '#index':
+                app.innerHTML = '<h1>这是首页内容</h1>'
+                break
+            case '#news':
+                app.innerHTML = '<h1>这是新闻内容</h1>'
+                break
+            case '#user':
+                app.innerHTML = '<h1>这是个人中心内容</h1>'
+                break
+            default:
+                app.innerHTML = '<h1>404</h1>'
+        }
+      });
+```
+eg. history模式
+```html
+     <ul id="menu">
+      <li>
+          <a href="/index" rel="external nofollow" >首页</a>
+      </li>
+      <li>
+          <a href="/news" rel="external nofollow" >资讯</a>
+      </li>
+      <li>
+          <a href="/user" rel="external nofollow" >个人中心</a>
+      </li>
+      </ul>
+    <div id="app">
+    </div>
+```
+```js
+    document.querySelector('#menu').addEventListener('click',function (e) {
+        if(e.target.nodeName ==='A'){
+            e.preventDefault()
+            let path = e.target.getAttribute('href')  //获取超链接的href，改为pushState跳转，不刷新页面
+            window.history.pushState({},'',path)  //修改浏览器中显示的url地址
+            render(path)  //根据path，更改页面内容
+        }
+    })
+    function render(path) {
+        let app = document.getElementById('app')
+        switch (path) {
+            case '/index':
+                app.innerHTML = '<h1>这是首页内容</h1>'
+                break
+            case '/news':
+                app.innerHTML = '<h1>这是新闻内容</h1>'
+                break
+            case '/user':
+                app.innerHTML = '<h1>这是个人中心内容</h1>'
+                break
+            default:
+                app.innerHTML = '<h1>404</h1>'
+        }
+    }
+    //监听浏览器前进后退事件，并根据当前路径渲染页面
+    window.onpopstate = function (e) {
+        render(location.pathname)
+    }
+    //第一次进入页面显示首页
+    render('/index')
+```
+
+
 :::
 ##  call,apply,bind 的作用，手写一个call,apply,bind方法 <Badge type="warning" text="middle" /> 
 ::: details 展开查看

@@ -80,10 +80,21 @@
 :::
 ## 浏览器渲染网页的过程 <Badge type="warning" text="middle" />
 ::: details 展开查看
-1. 解析HTML，构建DOM树。
-2. 解析CSS，构建CSSOM树。
-3. 将DOM树和CSSOM树合并成渲染树。
-4. 根据渲染树进行绘制。
+1.解析HTML文件生成DOM与CSSOM  
+2.结合DOM与CSSOM生成样式树    
+3.根据实际显示情况由样式树生成布局树  
+4.为布局树优化进行分层  
+5.开始提供绘制指令  
+6.优化绘制块进行分片绘制  
+7.对分片结果进行光栅化  
+8.开始绘图  
+![alt text](image.png)
+:::
+## 为什么transform的性能好 <Badge type="warning" text="middle" />
+::: details 展开查看
+1.transform不会触发回流重绘  
+2.transform会进行GPU加速  
+3.非主线程参与(合成线程)
 :::
 ## 浏览器输入URL发生了什么 <Badge type="warning" text="middle" />
 ::: details 展开查看

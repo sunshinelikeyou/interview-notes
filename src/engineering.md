@@ -76,6 +76,26 @@ optimization: {
 - 使用压缩工具： 使用现代的压缩工具，如Brotli和Gzip，来对静态资源进行压缩
 - 使用CDN： 将项目中引用的静态资源路径修改为CDN上的路径，减少图片、字体等静态资源等打包
 :::
+## ES Modules (ESM) 有哪些特性？如何开启ESM规范 <Badge type="warning" text="middle" />
+::: details 展开查看
+- 使用: 直接在script标签使用type=module 开启以ESM规范执行JS代码
+- 特性:
+- 自动使用严格模式,忽略“”use strict“
+- 每一个module都运行在单独的私有作用域中
+- ESM是通过CORS去请求外部JS模块的
+- ESM的script标签会延迟执行脚本,相当于添加defer属性
+:::
+## ES Modules (ESM) 与CommonJS 规范的区别 <Badge type="warning" text="middle" />
+::: details 展开查看
+维度 | ESM | CommonJs  
+-|-|-   
+模块输出 | 值的引用 | 值的拷贝  
+运行时机 | 编译时 | 运行时  
+导出数量 | 多个导出 | 单个导出  
+执行逻辑 | 同步,异步 | 同步  
+this指向 | undefined | 当前模块  
+使用方法 | import, export | require,modules.export  
+:::
 ## vite 开发环境为什么比 webpack 快？<Badge type="warning" text="middle" />
 ::: details 展开查看
 1. 原生 ESM 支持

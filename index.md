@@ -33,6 +33,9 @@ features:
   - title: React
     details: React用于构建 Web 和原生交互界面的库
     link: /src/react
+  - title: HarmoneyOS
+    details: 一套代码工程，一次开发上架，多端按需部署，为用户呈现多设备统一且卓越的使用体验。
+    link: /src/harmoneyOS
   - title: 前端工程化
     details: 前端工程化是指使用软件工程的技术和方法来进行前端的开发流程、技术、工具、经验等规范化、标准化
     link: /src/engineering

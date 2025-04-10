@@ -46,6 +46,7 @@ export default defineConfig({
           { text: "TypeScript", link: "/src/typescript.md" },
           { text: "Vue", link: "/src/vue" },
           { text: "React", link: "/src/react.md" },
+          { text: "HarmoneyOS", link: "/src/harmoneyOS.md" },
           { text: "前端工程化", link: "/src/engineering.md" },
           { text: "微信小程序", link: "/src/wxprogram.md" },
           { text: "Uniapp", link: "/src/uniapp.md" },

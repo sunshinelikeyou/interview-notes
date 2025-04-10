@@ -1,4 +1,16 @@
 # Engineering Part (前端工程化部分) 
+## 什么是webpack？它的作用是什么 <Badge type="tip" text="primary" />
+::: details 展开查看
+Webpack是一个模块打包工具，它将多个模块打包成一个或多个文件，以便在浏览器中使用。它的作用是将前端开发中的各种资源（如JavaScript、CSS、图片等）进行打包，以便在浏览器中使用。Webpack可以将这些资源进行压缩、合并、分割等操作，以提高页面加载速度和性能。
+主要作用:
+- 模块打包：将多个模块打包成一个或多个文件，以便在浏览器中使用。
+- 依赖管理：管理项目中的依赖关系，自动解析处理模块间的依赖关系,减少手动管理依赖的复杂性,确保每个模块的正确加载。
+- 代码分割：将代码分割成多个模块，以便按需加载，提高页面加载速度。
+- 代码转换：将ES6+代码转换为ES5代码，以便在浏览器中使用。
+- 插件扩展：通过插件扩展Webpack的功能，如代码压缩、代码分割、资源管理等。
+- 开发环境支持：提供开发环境支持，如热更新、调试等。
+- 生产环境支持：提供生产环境支持，如代码压缩、资源管理等。
+:::
 ## Webpack 配置有哪些？ <Badge type="tip" text="primary" />
 ::: details 展开查看
 - entry 指定Webpack打包的入口文件。可以是单个或多个javascrit文件。这个配置决定了Webpack从哪个模块开始生成依赖关系图
@@ -20,8 +32,61 @@
 ::: details 展开查看
 名称 | 功能 | 用法 | 配置方法
 ---|---|--- | ---
-loader | 用于对模块的源代码进行转换 | 打包处理 CSS、图片、JS 等文件 | module.rules 中配置，类型是对象数组，⾥⾯描述了对于什么类型的⽂件（ test ），使⽤什么加载( loader )和使⽤的参数（ options 
-plugin | 用于对整个构建过程进行干预 | 打包优化、资源管理、注入环境变量 | plugins 中配置，类型是对象， 每一项是一个 Plugin 的实例，参数都通过构造函数传入
+loader | 本质是函数,对接受到的内容践行转换,返回转换后的结果 | 打包处理 CSS、图片、JS 等文件 | module.rules 中配置，类型是对象数组，⾥⾯描述了对于什么类型的⽂件（ test ），使⽤什么加载( loader )和使⽤的参数（ options 
+plugin | 插件,基于事件流框架Tapbale,拓展webpack功能,webpack运行生命周期中会广播很多事件,plugin可以监听事件,在合适时机通过webpack API改变输出结果 | 打包优化、资源管理、注入环境变量 | plugins 中配置，类型是对象， 每一项是一个 Plugin 的实例，参数都通过构造函数传入
+:::
+
+## 有哪些常见的Loader？如何配置loader?你用过哪些loader? <Badge type="tip" text="primary" />
+::: details 展开查看
+- babel-loader 用于将ES6+代码转换为ES5代码
+- css-loader 用于加载CSS文件
+- style-loader 用于将CSS代码注入到HTML文件中
+- file-loader 用于加载文件
+- url-loader 用于加载文件，并将文件转换为base64编码
+- eslint-loader 用于检查代码是否符合ESLint规则
+- ts-loader 用于加载TypeScript文件
+- vue-loader 用于加载Vue文件
+- postcss-loader 用于加载PostCSS文件
+- less-loader 用于加载Less文件
+- sass-loader 用于加载Sass文件
+- stylus-loader 用于加载Stylus文件
+- json-loader 用于加载JSON文件
+- source-map-loader 用于加载Source Map文件
+- vue-template-compiler 用于编译Vue文件中的模板
+  
+在webpack的配置文件中，配置module.rules,类型是对象数组，⾥⾯描述了对于什么类型的⽂件（ test ），使⽤什么加载( loader )和使⽤的参数（ options ）
+也可以通过插件的形式来配置loader,例如babel-loader,css-loader,style-loader等
+:::
+## 有哪些常见的Plugin？如何配置Plugin?你用过哪些Plugin? <Badge type="tip" text="primary" />
+::: details 展开查看
+- html-webpack-plugin 用于生成HTML文件
+- clean-webpack-plugin 用于清理dist目录
+- copy-webpack-plugin 用于复制文件
+- uglifyjs-webpack-plugin 用于压缩JS代码
+- extract-text-webpack-plugin 用于提取CSS代码
+- optimize-css-assets-webpack-plugin 用于压缩CSS代码
+- webpack-bundle-analyzer 用于分析打包后的文件
+- webpack-dev-server 用于开发服务器
+- webpack-merge 用于合并配置
+- webpack-hot-module-replacement-plugin 用于热更新
+- webpack-define-plugin 用于定义环境变量
+- speed-measure-webpack-plugin 用于测量构建时间
+- ingnore-emit-webpack-plugin 用于忽略某些文件
+
+在webpack的配置文件中，配置plugins
+:::
+
+## Webpack的事件机制了解吗？ <Badge type="tip" text="middle" />
+::: details 展开查看
+- beforeRun 开始执行构建之前触发,可以用于清理上一次构建的临时文件或状态
+- run 开始执行构建时触发
+- beforeCompile 编译开始之前触发,可以用于添加一些额外的编译配置或者预处理代码
+- compile 开始编译时触发,用于监听编译过程或者处理编译过程中的错误
+- thisCompilation 创建新的 compilation 时触发,代表当前编译过程中的所有状态和信息
+- compilation 编译过程中触发,可用于监听编译过程或者处理编译过程中的错误
+- emit 生成资源文件之前触发,修改输出文件或者生成附加文件
+- afterEmit 生成资源文件之后触发,可用于清理中间文件
+- done 编译完成之后触发,用于生产构建报告
 :::
 
 ## 什么是Code Splitting <Badge type="tip" text="primary" />
@@ -51,13 +116,18 @@ plugin | 用于对整个构建过程进行干预 | 打包优化、资源管理�
 7. 输出完成： 在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
 :::
 
-## Webpack的Tree Shaking原理 <Badge type="warning" text="middle" />
+## Webpack的Tree Shaking原理? 触发条件? <Badge type="warning" text="middle" />
 ::: details 展开查看
 >概念：Tree Shaking 是一个利用ES6模块静态结构特性[^1]来去除生产环境下不必要代码的优化过程   
 >原理： 
 1. 当Webpack分析代码时，它会标记出所有的import，export语句   
 2. 然后，当Webpack确定某个模块没有被导入时，它会在生成的bundle中排除这个模块的代码
 3. Webpack、还会进行递归的标记清理，以确保所有未使用的依赖项都不会出现在最终的bundle中  
+>触发条件: 
+1. 通过解构的方式引用方法
+2. 调用npm包必须使用ESM
+3. 同一文件的treeshaking有触发条件,    mode=production
+4. 一定要使用解构来加载模块 
 ```js
 optimization: {
     usedExports: true,

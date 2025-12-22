@@ -16,7 +16,7 @@ hero:
       link: /src/introduce
 features:
   - title: Html
-    details:  超文本标记语言 (Hypertext Mark-up Language)是一种用于创建网页的标准标记语言。
+    details: 超文本标记语言 (Hypertext Mark-up Language)是一种用于创建网页的标准标记语言。
     link: /src/html
   - title: Css
     details: 层叠样式表(Cascading Style Sheets)是一种用来表现HTML或XML等文件样式的计算机语言
@@ -48,4 +48,10 @@ features:
   - title: 算法
     details: 算法是计算机科学的基础，它描述了一种解决问题的清晰指令集
     link: /src/algorithm
+  - title: shell
+    details: shell脚本是一种命令行脚本，用于自动化执行命令
+    link: /src/shell
+  - title: 软考(软件设计师)
+    details: 计算机技术与软件专业技术资格考试是中国计算机学会和中国电子工业联合会举办的全国性计算机技术与软件专业技术资格考试，是评价软件专业人员技术水平的标准化考试
+    link: /src/software-examination
 ---
